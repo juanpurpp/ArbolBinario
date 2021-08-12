@@ -18,7 +18,9 @@ public class Arbol{
 		}
 		System.out.println("insertados");
 		System.out.println("Anchura de"+raiz.num);
-		System.out.println(raiz.anchura());
+		System.out.println("Su anchura es "+raiz.anchura());
+		System.out.println("Su altura es "+raiz.altura());
+		System.out.println("Sus hojas son "+raiz.hojas());
 		/*
 		for(int i = 0; i < numeros.length; i++){
 			raiz.insertar(numeros[i]);

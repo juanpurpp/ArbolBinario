@@ -69,6 +69,11 @@ public class Nodo{
 			else der.insertar(num);
 		}
 	}
+	public String inorder(){
+		
+		String r = "";
+		return r;
+	}
 	public String anchura(){
 		int niveles = 0;
 		Nodo[][] pisos = new Nodo[niveles+1][];
@@ -83,12 +88,12 @@ public class Nodo{
 			for(Nodo item: pisos[niveles-1]){
 				if(item!=null){
 					if(item.izq != null){
-						System.out.println("pasos es "+pasos+" cuando item.izq es "+ item.izq.num);
+						//System.out.println("pasos es "+pasos+" cuando item.izq es "+ item.izq.num);
 						pisos[niveles][pasos] = item.izq;
 						pasos++;
 					}
 					if(item.der != null){
-						System.out.println("pasos es "+pasos+" cuando item.izq es "+ item.der.num);
+						//System.out.println("pasos es "+pasos+" cuando item.izq es "+ item.der.num);
 						pisos[niveles][pasos] = item.der;
 						pasos++;
 					}
@@ -97,11 +102,10 @@ public class Nodo{
 			seguir = false;
 			for(Nodo ultimos:pisos[niveles]){
 				if(ultimos != null){
-					if(ultimos.izq != null || ultimos.der != null) seguir = true;
+					if(!ultimos.esHoja()) seguir = true;
 				}
 			}
 		}
-
 		String r = "";
 		for(Nodo[] d1:pisos){
 			for(Nodo d2: d1){
@@ -110,7 +114,80 @@ public class Nodo{
 		}
 		return r;
 	}
+	public int altura(){
+		int niveles = 0;
+		Nodo[][] pisos = new Nodo[niveles+1][];
+		pisos[niveles] = new Nodo[(int)Math.pow(2,niveles)];
+		boolean seguir = true;
+		pisos[0][0] = this;
+		while(seguir){
+			niveles++;
+			pisos = Arrays.copyOf(pisos,niveles+1);
+			pisos[niveles] = new Nodo[(int)Math.pow(2,niveles)];
+			int pasos = 0;
+			for(Nodo item: pisos[niveles-1]){
+				if(item!=null){
+					if(item.izq != null){	
+						pisos[niveles][pasos] = item.izq;
+						pasos++;
+					}
+					if(item.der != null){
+						pisos[niveles][pasos] = item.der;
+						pasos++;
+					}
+				}
+			}
+			seguir = false;
+			for(Nodo ultimos:pisos[niveles]){
+				if(ultimos != null){
+					if(!ultimos.esHoja()) seguir = true;
+				}
+			}
+		}
+		return niveles+1;
+	}
+	public String hojas(){
+		int niveles = 0;
+		Nodo[][] pisos = new Nodo[niveles+1][];
+		pisos[niveles] = new Nodo[(int)Math.pow(2,niveles)];
+		boolean seguir = true;
+		pisos[0][0] = this;
+		while(seguir){
+			niveles++;
+			pisos = Arrays.copyOf(pisos,niveles+1);
+			pisos[niveles] = new Nodo[(int)Math.pow(2,niveles)];
+			int pasos = 0;
+			for(Nodo item: pisos[niveles-1]){
+				if(item!=null){
+					if(item.izq != null){
+						//System.out.println("pasos es "+pasos+" cuando item.izq es "+ item.izq.num);
+						pisos[niveles][pasos] = item.izq;
+						pasos++;
+					}
+					if(item.der != null){
+						//System.out.println("pasos es "+pasos+" cuando item.izq es "+ item.der.num);
+						pisos[niveles][pasos] = item.der;
+						pasos++;
+					}
+				}
+			}
+			seguir = false;
+			for(Nodo ultimos:pisos[niveles]){
+				if(ultimos != null){
+					if(!ultimos.esHoja()) seguir = true;
+				}
+			}
+		}
+		String r = "";
+		for(Nodo[] d1:pisos){
+			for(Nodo d2: d1){
+				if(d2 != null && d2.esHoja()) r+=d2.num+"_";
+			}
+		}
+		return r;
+	}
 }
+
 /*
 int niveles = 0;
 		Nodo aux = this;
