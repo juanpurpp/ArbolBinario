@@ -14,13 +14,14 @@ public class Arbol{
 		//for(int mostrar:numeros) System.out.println(mostrar);
 		for(int i = 0; i < numeros.length; i++){
 			if(i==0) raiz = new Nodo(numeros[0]);
-			else{
-				Nodo aux = raiz;
-			}
+			else raiz.insertar(numeros[i]);
 		}
+		System.out.println("insertados");
+		System.out.println("Anchura de"+raiz.num);
+		System.out.println(raiz.anchura());
 		/*
 		for(int i = 0; i < numeros.length; i++){
 			raiz.insertar(numeros[i]);
 		}*/
 	}
-} 
+}
