@@ -70,8 +70,27 @@ public class Nodo{
 		}
 	}
 	public String inorder(){
-		
 		String r = "";
+		//metodo de disección creado por juan
+		//diseccionar a la izquierda
+		if(this.izq != null) r+=this.izq.inorder();
+		r+= this.num+"_";
+		if(this.der != null) r+=this.der.inorder();
+		//disecionar al a derecha
+		return r;
+	}
+	public String preorder(){
+		String r = "";
+		r+= this.num+"_";
+		if(this.izq != null) r+=this.izq.preorder();
+		if(this.der != null) r+=this.der.preorder();
+		return r;
+	}
+	public String postorder(){
+		String r = "";
+		if(this.izq != null) r+=this.izq.postorder();
+		if(this.der != null) r+=this.der.postorder();
+		r+= this.num+"_";
 		return r;
 	}
 	public String anchura(){

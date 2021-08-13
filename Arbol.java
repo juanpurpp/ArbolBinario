@@ -21,6 +21,9 @@ public class Arbol{
 		System.out.println("Su anchura es "+raiz.anchura());
 		System.out.println("Su altura es "+raiz.altura());
 		System.out.println("Sus hojas son "+raiz.hojas());
+		System.out.println("inorder es  "+raiz.inorder());
+		System.out.println("preorder es  "+raiz.preorder());
+		System.out.println("postorder es  "+raiz.postorder());
 		/*
 		for(int i = 0; i < numeros.length; i++){
 			raiz.insertar(numeros[i]);
