@@ -1,11 +1,13 @@
 import java.util.Arrays;
 import java.lang.Math;
+
 public class Nodo{
 	public int num;
 	public Nodo izq;
 	public Nodo der;
 	public Nodo padre;
-	public int altura;
+	public Nodo(){	
+	}
 	public Nodo(int num){
 		this.num = num;
 	}
@@ -179,12 +181,12 @@ public class Nodo{
 			for(Nodo item: pisos[niveles-1]){
 				if(item!=null){
 					if(item.izq != null){
-						//System.out.println("pasos es "+pasos+" cuando item.izq es "+ item.izq.num);
+						//System.out.println("izq: "+ item.izq.num);
 						pisos[niveles][pasos] = item.izq;
 						pasos++;
 					}
 					if(item.der != null){
-						//System.out.println("pasos es "+pasos+" cuando item.izq es "+ item.der.num);
+						//System.out.println("der: "+ item.der.num);
 						pisos[niveles][pasos] = item.der;
 						pasos++;
 					}
@@ -203,9 +205,44 @@ public class Nodo{
 				if(d2 != null && d2.esHoja()) r+=d2.num+"_";
 			}
 		}
-		return r;
+		//ordenamos las hojas de
+		int i = 0;
+		Nodo orden=null;
+		for(String ord: r.split("_")){
+			if(i==0) orden = new Nodo(Integer.parseInt(ord));
+			else orden.insertar(Integer.parseInt(ord));
+			i++;
+		}
+
+		return orden.inorder();
+	}
+	public void eliminar(int num){
+		if(this.num == num){
+			if(this.izq != null){
+				this.num = this.izq.num;
+				if(this.izq.der != null)this.der=this.izq.der;
+				else this.der = null;
+				if(this.izq.izq != null) this.izq=this.izq.izq;
+				else this.izq = null;
+			}
+			else if(this.der!=null){
+				this.num = this.der.num;
+				if(this.der.izq != null) this.izq=this.der.izq;
+				else this.izq = null;
+				if(this.der.der != null)this.der=this.der.der;
+				else this.der = null;
+			}
+			return;
+		}
+		else if(this.izq!=null)
+			if(this.izq.num == num && this.izq.esHoja()) this.izq = null;
+			else if(num<=this.num) this.izq.eliminar(num);
+		else if(this.der!=null)
+			if(this.der.num == num && this.der.esHoja()) this.der = null;
+			else if(num>this.num) this.der.eliminar(num);
 	}
 }
+
 
 /*
 int niveles = 0;
