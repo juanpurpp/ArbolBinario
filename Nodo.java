@@ -242,25 +242,3 @@ public class Nodo{
 			else if(num>this.num) this.der.eliminar(num);
 	}
 }
-
-
-/*
-int niveles = 0;
-		Nodo aux = this;
-		Nodo[][] pisos = new Nodo[niveles+1][(int)Math.pow(2,niveles)];
-		pisos[0][0] = aux;
-		boolean seguir = true;
-		while(seguir){
-			niveles++;
-			pisos= Arrays.copyOf(pisos, niveles+1);
-			pisos[niveles] = new Nodo[(int)Math.pow(2,niveles)];
-			int pasos = 0;
-			for(int i = 0; i < pisos[niveles-1].length; i++){
-				pisos[niveles][pasos] = pisos[niveles-1][i].izq;
-				pasos++;
-				pisos[niveles][pasos] = pisos[niveles-1][i].der;
-				pasos++;
-			}
-			for()
-		}
-*/
